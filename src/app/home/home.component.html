@@ -1,0 +1,13 @@
+<div class="bg-light p-5">
+  <h1>Navbar example</h1>
+  <p class="lead">Get started by adding a new vocab</p>
+  <a class="btn btn-lg btn-primary" role="button">Add</a>
+</div>
+<main class="container" >
+  <div id="vocabs-list">
+    <h3>Vocab List :</h3>
+    <ul class="list-group">
+      <li *ngFor="let vocab of vocabs" class="list-group-item" aria-current="true">{{vocab.value}} - {{vocab.translation}} - {{vocab.partOfSpeech}}</li>
+    </ul>
+  </div>
+</main>
