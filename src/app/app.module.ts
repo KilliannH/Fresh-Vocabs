@@ -5,7 +5,6 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {RouterModule, Routes} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { JwtModule } from '@auth0/angular-jwt';
@@ -15,6 +14,7 @@ import {HomeComponent} from "./home/home.component";
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import config from "./config.example.";
+import {AuthService} from "./services/auth.service";
 
 
 // specify the key where the token is stored in the local storage
@@ -34,9 +34,9 @@ export function tokenGetter() {
     DashboardComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
@@ -47,8 +47,9 @@ export function tokenGetter() {
       }
     })
   ],
-  exports: [RouterModule],
-  providers: [],
+
+  // make it a singleton
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

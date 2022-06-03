@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Vocab} from "../models/vocab";
 import {AuthService} from "../services/auth.service";
-import {DecodedToken} from "../interfaces";
+import {UserInfos} from "../interfaces";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,18 +11,16 @@ import {DecodedToken} from "../interfaces";
 export class DashboardComponent implements OnInit {
 
   vocabs: Vocab[]
-  decodedToken: DecodedToken;
-  connectedUser: string | undefined;
-  constructor(authService: AuthService) {
+  connectedUser: UserInfos
+  constructor(private authService: AuthService) {
     this.vocabs = [
       new Vocab("1", "yes", "oui", "numn"),
       new Vocab("2", "hello", "salut", "interjection")
     ]
-    this.decodedToken = authService.decodeToken();
+    // we do have a connected user at this point
+    this.connectedUser = this.authService.decodeToken();
   }
 
-  ngOnInit(): void {
-    this.connectedUser = this.decodedToken.username;
-  }
+  ngOnInit(): void { }
 
 }

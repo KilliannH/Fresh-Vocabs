@@ -3,24 +3,37 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {DecodedToken, LoginRequest, LoginResponse} from '../interfaces';
+import {LoginRequest, LoginResponse} from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private jwtService: JwtHelperService) { }
+  userLoggedIn: boolean = false
+
+  constructor(private http: HttpClient, private jwtService: JwtHelperService) {
+    this.userLoggedIn = jwtService.decodeToken();
+  }
+
 
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>('/api/login', loginRequest).pipe(
       tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.token)),
-      tap(() => console.log('[Auth] Login Successful'))
+      tap(() => {
+        console.log('[Auth] Login Successful');
+        this.userLoggedIn = true;
+      })
     );
   }
 
   decodeToken() {
     return this.jwtService.decodeToken();
+  }
+
+  logout() {
+    localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY);
+    this.userLoggedIn = false;
   }
 }
 

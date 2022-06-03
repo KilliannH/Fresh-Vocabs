@@ -22,10 +22,10 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface DecodedToken {
+export interface UserInfos {
   email: string;
   username: string;
-  expiresDate: number
+  tokenExpiresDate: number
 }
 
 /* export interface RegisterRequest {

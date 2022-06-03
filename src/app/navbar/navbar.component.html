@@ -4,11 +4,22 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul *ngIf="authService.userLoggedIn;" class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="/login">Login</a>
+          <a class="nav-link" aria-current="page" routerLink="/dashboard">Dashboard</a>
         </li>
+      </ul>
+      <ul class="navbar-nav" [ngClass]="{'ms-auto': !authService.userLoggedIn}">
+          <li *ngIf="authService.userLoggedIn;" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{this.authService.decodeToken().username}}</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+            </ul>
+          </li>
+          <li *ngIf="!authService.userLoggedIn;">
+            <a class="nav-link" aria-current="page" routerLink="/login">Login</a>
+          </li>
       </ul>
     </div>
   </div>
