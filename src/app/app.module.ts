@@ -3,9 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {Router, RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+
 import { NavbarComponent } from './navbar/navbar.component';
 import {HomeComponent} from "./home/home.component";
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   {
@@ -16,6 +19,10 @@ const appRoutes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 
@@ -23,11 +30,13 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
+    HttpClientModule,
     NgbModule
   ],
   exports: [RouterModule],
