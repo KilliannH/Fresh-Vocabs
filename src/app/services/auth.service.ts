@@ -23,3 +23,6 @@ export class AuthService {
     return this.jwtService.decodeToken();
   }
 }
+
+// from : https://github.com/ThomasOliver545/angular-material-login-and-register-example/blob/main/src/app/public/services/auth-service/auth.service.ts
+// see for refreshToken logic, how it's done (eventually)
