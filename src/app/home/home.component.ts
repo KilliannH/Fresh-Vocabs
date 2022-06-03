@@ -8,14 +8,7 @@ import {Vocab} from "../models/vocab";
 })
 export class HomeComponent implements OnInit {
 
-  vocabs: Vocab[];
-
-  constructor() {
-    this.vocabs = [
-      new Vocab("1", "yes", "oui", "numn"),
-      new Vocab("2", "hello", "salut", "interjection")
-    ]
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 

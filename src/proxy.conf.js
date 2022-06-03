@@ -1,10 +1,9 @@
-const config = require("./config.example");
+const config = require("./config");
 
 const PROXY_CONFIG = [
   {
     context: [
       "/api",
-      "/login"
     ],
     target: `${config.backendProtocol}://${config.backendHost}:${config.backendPort}`,
     secure: false,

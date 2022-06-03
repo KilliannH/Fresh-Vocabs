@@ -1,0 +1,31 @@
+<div class="bg-secondary p-5">
+  <h1>Hello, {{connectedUser}}</h1>
+  <p class="lead">Get started by adding a new vocab</p>
+  <a class="btn btn-lg btn-primary" role="button">Add</a>
+</div>
+<main class="container" >
+  <div id="vocabs-list">
+    <h3>Vocab List :</h3>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Value</th>
+        <th scope="col">Translation</th>
+        <th scope="col">Part of speech</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vocab of vocabs; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          {{ vocab.value }}
+        </td>
+        <td>{{ vocab.translation}}</td>
+        <td>{{ vocab.partOfSpeech}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+

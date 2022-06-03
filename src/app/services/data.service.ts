@@ -13,10 +13,6 @@ export class DataService {
   constructor(private http: HttpClient) {
   }
 
-  login(credentials: Object) {
-    return this.http.post('/login', credentials).subscribe((res) => res);
-  }
-
   getVocabs() {
     // return this.http.get()
   }
