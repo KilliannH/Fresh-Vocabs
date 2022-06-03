@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Vocab} from "../vocab";
+import {Vocab} from "../models/vocab";
 
 @Component({
   selector: 'app-home',
