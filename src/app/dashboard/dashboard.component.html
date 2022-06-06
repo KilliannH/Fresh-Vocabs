@@ -1,7 +1,7 @@
 <div class="bg-secondary p-5">
   <h1>Hello, {{ connectedUser.username }}</h1>
   <p class="lead">Get started by adding a new vocab</p>
-  <a class="btn btn-lg btn-primary" role="button">Add</a>
+  <app-new-vocab-modal></app-new-vocab-modal>
 </div>
 <main class="container" >
   <div id="vocabs-list">
@@ -10,7 +10,7 @@
       <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Value</th>
+        <th scope="col">Word</th>
         <th scope="col">Translation</th>
         <th scope="col">Part of speech</th>
       </tr>
@@ -19,7 +19,7 @@
       <tr *ngFor="let vocab of vocabs; index as i">
         <th scope="row">{{ i + 1 }}</th>
         <td>
-          {{ vocab.value }}
+          {{ vocab.word }}
         </td>
         <td>{{ vocab.translation}}</td>
         <td>{{ vocab.partOfSpeech}}</td>

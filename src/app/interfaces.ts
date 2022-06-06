@@ -28,6 +28,13 @@ export interface UserInfos {
   tokenExpiresDate: number
 }
 
+export const partOfSpeechItems: string[] = [
+    "Noun", "Pronoun",
+    "Verb", "Adjective",
+    "Adverb", "Preposition",
+    "Conjunction", "Interjection"
+  ];
+
 /* export interface RegisterRequest {
   email: string;
   username: string;

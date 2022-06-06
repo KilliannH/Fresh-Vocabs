@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import config from "./config.example.";
 import {AuthService} from "./services/auth.service";
+import { NewVocabModalComponent } from './new-vocab-modal/new-vocab-modal.component';
 
 
 // specify the key where the token is stored in the local storage
@@ -31,7 +32,8 @@ export function tokenGetter() {
     NavbarComponent,
     HomeComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    NewVocabModalComponent
   ],
   imports: [
     AppRoutingModule,

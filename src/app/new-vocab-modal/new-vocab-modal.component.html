@@ -1,0 +1,33 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New vocab</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <label for="word">Word</label>
+        <div class="input-group">
+          <input id="word" class="form-control" name="word" [ngModel]="newVocab.word">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="translation">Translation</label>
+        <div class="input-group">
+          <input id="translation" class="form-control" name="translate" [ngModel]="newVocab.translation">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label>Part of speech</label>
+        <div class="buttons-group">
+          <button *ngFor="let item of partOfSpeechItems" type="button" class="btn btn-outline-secondary button-partOfSpeech">{{item}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
+
+<button class="btn btn-lg btn-primary" (click)="open(content)">Add</button>
