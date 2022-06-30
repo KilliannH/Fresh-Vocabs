@@ -10,8 +10,7 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class DataService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getVocabs() {
     // return this.http.get()

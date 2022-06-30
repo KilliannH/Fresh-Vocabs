@@ -13,12 +13,11 @@ export interface RefreshToken {
 Interface for the Login Response (can look different, based on your backend api)
 */
 export interface LoginResponse {
-  success: boolean,
   token: string
 }
 
 export interface LoginRequest {
-  email: string;
+  username: string;
   password: string;
 }
 
