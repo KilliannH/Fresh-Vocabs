@@ -22,7 +22,6 @@ export interface LoginRequest {
 }
 
 export interface UserInfos {
-  email: string;
   username: string;
   tokenExpiresDate: number
 }

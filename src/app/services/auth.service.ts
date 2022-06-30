@@ -5,20 +5,22 @@ import {Observable, tap} from 'rxjs';
 // @ts-ignore
 const config = require("config");
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {LoginRequest, LoginResponse} from '../interfaces';
+import {LoginRequest, LoginResponse, UserInfos} from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  userLoggedIn: boolean = false
+  userLoggedIn: UserInfos | null;
   token: string | null;
   urlPrefix: string;
 
   constructor(private http: HttpClient, private jwtService: JwtHelperService) {
+    this.userLoggedIn = null;
     this.token = localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
-    this.userLoggedIn = this.token ? jwtService.decodeToken(this.token) : false;
+    // TODO - call in be to validate token here
+    this.decodeToken();
     this.urlPrefix = `${config.backendProtocol}://${config.backendHost}:${config.backendPort}`;
   }
 
@@ -28,18 +30,24 @@ export class AuthService {
       tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.token)),
       tap(() => {
         console.log('[Auth] - Login Successful');
-        this.userLoggedIn = true;
+        this.decodeToken();
       })
     );
   }
 
   decodeToken() {
-    return this.jwtService.decodeToken();
+    if(this.token) {
+      const decoded = this.jwtService.decodeToken(this.token);
+      this.userLoggedIn = {
+        username: decoded.sub,
+        tokenExpiresDate: decoded.exp
+      };
+    }
   }
 
   logout() {
     localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY);
-    this.userLoggedIn = false;
+    this.userLoggedIn = null;
   }
 }
 

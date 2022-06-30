@@ -11,14 +11,12 @@ import {UserInfos} from "../interfaces";
 export class DashboardComponent implements OnInit {
 
   vocabs: Vocab[]
-  connectedUser: UserInfos
-  constructor(private authService: AuthService) {
+  constructor(public authService: AuthService) {
     this.vocabs = [
       new Vocab("1", "yes", "oui", "numn"),
       new Vocab("2", "hello", "salut", "interjection")
     ]
     // we do have a connected user at this point
-    this.connectedUser = this.authService.decodeToken();
   }
 
   ngOnInit(): void { }

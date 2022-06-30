@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
   constructor(public authService: AuthService, private router: Router, public location: Location) { }
 
   ngOnInit(): void {
-    console.log("[Auth] currentUser", this.authService.decodeToken());
+    console.log("[Auth] currentUser", this.authService.userLoggedIn);
   }
 
   logout() {

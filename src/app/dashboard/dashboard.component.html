@@ -1,5 +1,5 @@
 <div class="bg-secondary p-5">
-  <h1>Hello, {{ connectedUser.username }}</h1>
+  <h1>Hello, {{ this.authService.userLoggedIn?.username }}</h1>
   <p class="lead">Get started by adding a new vocab</p>
   <app-new-vocab-modal></app-new-vocab-modal>
 </div>

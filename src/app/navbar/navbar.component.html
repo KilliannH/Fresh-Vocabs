@@ -15,7 +15,7 @@
       </ul>
       <ul class="navbar-nav" [ngClass]="{'ms-auto': !authService.userLoggedIn}">
           <li *ngIf="authService.userLoggedIn;" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{this.authService.decodeToken().username}}</a>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{this.authService.userLoggedIn.username}}</a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
             </ul>
