@@ -75,7 +75,7 @@
             },
             "development": {
               "browserTarget": "fresh-vocabs:build:development",
-              "proxyConfig": "src/proxy.conf.js"
+              "proxyConfig": "proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"

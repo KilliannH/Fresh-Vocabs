@@ -13,7 +13,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {HomeComponent} from "./home/home.component";
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import config from "./config.example.";
+// @ts-ignore
+const config = require("config");
+
+console.log(config);
 import {AuthService} from "./services/auth.service";
 import { NewVocabModalComponent } from './new-vocab-modal/new-vocab-modal.component';
 
