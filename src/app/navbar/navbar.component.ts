@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
 import { Location } from '@angular/common';
-import {UserInfos} from "../interfaces";
 
 @Component({
   selector: 'app-navbar',
@@ -11,10 +10,12 @@ import {UserInfos} from "../interfaces";
 })
 export class NavbarComponent {
 
-  constructor(public location: Location) { }
+  constructor(public authService: AuthService, private router: Router, public location: Location) { }
 
-  @Input()
-  logout: any;
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/home']);
+  }
 
   @Input()
   username: string | undefined

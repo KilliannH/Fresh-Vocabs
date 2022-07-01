@@ -4,14 +4,14 @@ import { Injectable } from '@angular/core';
 import {Observable, tap} from 'rxjs';
 import constants from '../constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {LoginRequest, LoginResponse, UserInfos} from '../interfaces';
+import {LoginRequest, LoginResponse, TokenInfos} from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  userLoggedIn: UserInfos | null;
+  userLoggedIn: TokenInfos | null;
   token: string | null;
 
   constructor(private http: HttpClient, private jwtService: JwtHelperService) {
