@@ -33,12 +33,19 @@ export const partOfSpeechItems: string[] = [
     "Conjunction", "Interjection"
   ];
 
+// function to convert a vocab with it's partOfSpeech as a string
+export function convertVocab(vocab: any) {
+  return vocab.map((item: any) => {
+    item.partOfSpeech = partOfSpeechItems[item.partOfSpeech];
+    return item;
+  });
+}
+
 /* export interface RegisterRequest {
   email: string;
   username: string;
-  firstname: string;
-  lastname: string;
   password: string;
+  role: string
 } */
 
 /*

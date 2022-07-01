@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 import {Vocab} from "../models/vocab";
-import constants from "../constants";
 import {AuthService} from "./auth.service";
 
 @Injectable({
@@ -21,15 +17,10 @@ export class DataService {
   }
 
   newVocab(vocab:Vocab) {
-    return this.http.post(constants.urlPrefix + '/api/vocabs', vocab, {headers: this.headers}).subscribe((res: any) => {
-      console.log(res);
-      return res;
-    });
+    return this.http.post('/api/vocabs', vocab, {headers: this.headers});
   }
 
   getVocabs() {
-    return this.http.get(constants.urlPrefix + '/api/vocabs', {headers: this.headers}).subscribe((res: any) => {
-      return res;
-    });
+    return this.http.get('/api/vocabs', {headers: this.headers});
   }
 }

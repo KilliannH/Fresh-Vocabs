@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Vocab} from "../models/vocab";
 import {AuthService} from "../services/auth.service";
 import {DataService} from "../services/data.service";
+import {convertVocab, partOfSpeechItems} from "../interfaces";
 
 @Component({
   selector: 'app-dashboard',
@@ -10,14 +10,15 @@ import {DataService} from "../services/data.service";
 })
 export class DashboardComponent implements OnInit {
 
-  vocabs: Vocab[]
+  vocabs: any
   constructor(public authService: AuthService, private dataService: DataService) {
     this.vocabs = [];
-    // we do have a connected user at this point
   }
 
   ngOnInit(): void {
-    this.dataService.getVocabs()
+    this.dataService.getVocabs().subscribe((res: any) => {
+      this.vocabs = convertVocab(res);
+    });
   }
 
 }
