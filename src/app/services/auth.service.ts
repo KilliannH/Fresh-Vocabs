@@ -11,10 +11,11 @@ import {LoginRequest, LoginResponse, UserInfos} from '../interfaces';
 })
 export class AuthService {
 
-  userLoggedIn: UserInfos | undefined;
+  userLoggedIn: UserInfos | null;
   token: string | null;
 
   constructor(private http: HttpClient, private jwtService: JwtHelperService) {
+    this.userLoggedIn = null;
     this.token = localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
     this.decodeToken();
   }
@@ -42,7 +43,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY);
-    this.userLoggedIn = undefined;
+    this.userLoggedIn = null;
   }
 }
 

@@ -11,8 +11,9 @@ import {UserInfos} from "../interfaces";
 })
 export class NavbarComponent {
 
+  // a shorthand to bind a string as input
   @Input()
-  userLoggedIn: UserInfos | undefined;
+  username: string | undefined;
 
   constructor(public authService: AuthService, private router: Router, public location: Location) { }
 
