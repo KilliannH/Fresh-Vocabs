@@ -2,8 +2,7 @@ import { LOCALSTORAGE_TOKEN_KEY } from "../app.module";
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable, tap} from 'rxjs';
-// @ts-ignore
-const config = require("config");
+import constants from '../constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {LoginRequest, LoginResponse, UserInfos} from '../interfaces';
 
@@ -14,19 +13,16 @@ export class AuthService {
 
   userLoggedIn: UserInfos | null;
   token: string | null;
-  urlPrefix: string;
 
   constructor(private http: HttpClient, private jwtService: JwtHelperService) {
     this.userLoggedIn = null;
     this.token = localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
-    // TODO - call in be to validate token here
     this.decodeToken();
-    this.urlPrefix = `${config.backendProtocol}://${config.backendHost}:${config.backendPort}`;
   }
 
 
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(this.urlPrefix + '/login', loginRequest).pipe(
+    return this.http.post<LoginResponse>(constants.urlPrefix + '/login', loginRequest).pipe(
       tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.token)),
       tap(() => {
         console.log('[Auth] - Login Successful');

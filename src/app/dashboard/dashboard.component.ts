@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Vocab} from "../models/vocab";
 import {AuthService} from "../services/auth.service";
-import {UserInfos} from "../interfaces";
+import {DataService} from "../services/data.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,14 +11,13 @@ import {UserInfos} from "../interfaces";
 export class DashboardComponent implements OnInit {
 
   vocabs: Vocab[]
-  constructor(public authService: AuthService) {
-    this.vocabs = [
-      new Vocab("1", "yes", "oui", "numn"),
-      new Vocab("2", "hello", "salut", "interjection")
-    ]
+  constructor(public authService: AuthService, private dataService: DataService) {
+    this.vocabs = [];
     // we do have a connected user at this point
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.dataService.getVocabs()
+  }
 
 }

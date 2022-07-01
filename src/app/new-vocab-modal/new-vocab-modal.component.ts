@@ -16,7 +16,7 @@ export class NewVocabModalComponent {
 
   constructor(private modalService: NgbModal) {
     this.partOfSpeechItems = partOfSpeechItems;
-    this.newVocab = new Vocab(undefined, '', '', 'Noun');
+    this.newVocab = new Vocab(undefined, '', '', 0);
   }
 
   open(content: object) {
