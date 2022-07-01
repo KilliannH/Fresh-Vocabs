@@ -4,18 +4,17 @@ import { Injectable } from '@angular/core';
 import {Observable, tap} from 'rxjs';
 import constants from '../constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {LoginRequest, LoginResponse, TokenInfos} from '../interfaces';
+import {LoginRequest, LoginResponse, UserInfos} from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  userLoggedIn: TokenInfos | null;
+  userLoggedIn: UserInfos | undefined;
   token: string | null;
 
   constructor(private http: HttpClient, private jwtService: JwtHelperService) {
-    this.userLoggedIn = null;
     this.token = localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
     this.decodeToken();
   }
@@ -43,7 +42,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY);
-    this.userLoggedIn = null;
+    this.userLoggedIn = undefined;
   }
 }
 

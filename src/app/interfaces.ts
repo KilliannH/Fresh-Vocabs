@@ -21,7 +21,7 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface TokenInfos {
+export interface UserInfos {
   username: string;
   tokenExpiresDate: number
 }

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {convertVocab, partOfSpeechItems} from "../interfaces"
 import {Vocab} from "../models/vocab";
 import {DataService} from "../services/data.service";
@@ -75,6 +75,16 @@ export class NewVocabModalComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  checkBeforeSave(modal: NgbModalRef) {
+    if (this.newVocab.word === "" ||
+        this.newVocab.translation === "" ||
+        !this.newVocab.partOfSpeech) {
+      // TODO: show snackbar to user
+      return;
+    }
+    // modal.close('Save click');
   }
 
 }
