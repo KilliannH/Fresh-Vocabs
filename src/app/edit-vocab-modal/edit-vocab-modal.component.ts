@@ -1,23 +1,20 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import {convertVocab, partOfSpeechItems} from "../interfaces"
 import {Vocab} from "../models/vocab";
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {DataService} from "../services/data.service";
+import {convertVocab, partOfSpeechItems} from "../interfaces";
 
 @Component({
-  selector: 'app-new-vocab-modal',
-  templateUrl: './new-vocab-modal.component.html',
-  styleUrls: ['./new-vocab-modal.component.css']
+  selector: 'app-edit-vocab-modal',
+  templateUrl: './edit-vocab-modal.component.html',
+  styleUrls: ['./edit-vocab-modal.component.css']
 })
-export class NewVocabModalComponent implements OnInit {
+export class EditVocabModalComponent implements OnInit {
 
   closeResult = '';
 
-  //@ts-ignore
-  newVocab: Vocab;
-
   @Input()
-  allVocabs: any;
+  currVocab: any;
 
   buttons: {
     value: string,
@@ -28,13 +25,12 @@ export class NewVocabModalComponent implements OnInit {
 
   ngOnInit() {
     this.buttons = partOfSpeechItems.map((item) => {
-      return {value: item, selected: false}
+      if (this.currVocab.partOfSpeech === item)
+        return {value: item, selected: true}
+      else {
+        return {value: item, selected: false}
+      }
     });
-    this.resetNgModel();
-  }
-
-  resetNgModel() {
-    this.newVocab = new Vocab(undefined, "", "", null);
   }
 
   open(content: object) {
@@ -42,13 +38,13 @@ export class NewVocabModalComponent implements OnInit {
     this.modalService.open(content, {ariaLabelledBy: 'Add new vocab'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
       console.log("result", this.closeResult);
-      this.dataService.newVocab(this.newVocab).subscribe((res: any) => {
+      // - TODO : don't handle updates if user dismissed instead of click on save, maybe show a snackbar
+      /*this.dataService.editVocab(this.currVocab).subscribe((res: any) => {
         const converted = convertVocab(res);
-        this.allVocabs.push(converted);
-        this.resetNgModel();
-      });
+        // this.allVocabs.push(converted);
+      });*/
     }, (reason) => {
-      this.closeResult = `Dismissed ${NewVocabModalComponent.getDismissReason(reason)}`;
+      this.closeResult = `Dismissed ${EditVocabModalComponent.getDismissReason(reason)}`;
       console.log("reason", this.closeResult);
     });
   }
@@ -64,7 +60,7 @@ export class NewVocabModalComponent implements OnInit {
       return;
     }
     item.selected = true;
-    this.newVocab.partOfSpeech = partOfSpeechItems.indexOf(item.value);
+    this.currVocab.partOfSpeech = item.value;
   }
 
   private static getDismissReason(reason: any): string {
@@ -76,5 +72,4 @@ export class NewVocabModalComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
 }

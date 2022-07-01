@@ -20,8 +20,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.getVocabs().subscribe((res: any) => {
-      this.vocabs = convertVocab(res);
+      this.vocabs = res.map((item: any) => convertVocab(item));
     });
   }
-
 }

@@ -1,7 +1,7 @@
 <div class="bg-secondary p-5">
   <h1>Hello, {{ this.authService.userLoggedIn?.username }}</h1>
   <p class="lead">Get started by adding a new vocab</p>
-  <app-new-vocab-modal></app-new-vocab-modal>
+  <app-new-vocab-modal [allVocabs]="vocabs"></app-new-vocab-modal>
 </div>
 <main class="container" >
   <div id="vocabs-list">
@@ -13,6 +13,7 @@
         <th scope="col">Word</th>
         <th scope="col">Translation</th>
         <th scope="col">Part of speech</th>
+        <th scope="col">&nbsp;</th>
       </tr>
       </thead>
       <tbody>
@@ -23,6 +24,8 @@
         </td>
         <td>{{ vocab.translation}}</td>
         <td>{{ vocab.partOfSpeech}}</td>
+        <td><app-edit-vocab-modal [currVocab]="vocab"></app-edit-vocab-modal>
+        </td>
       </tr>
       </tbody>
     </table>

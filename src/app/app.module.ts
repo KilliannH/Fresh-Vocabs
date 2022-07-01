@@ -19,6 +19,7 @@ const config = require("config");
 console.log(config);
 import {AuthService} from "./services/auth.service";
 import { NewVocabModalComponent } from './new-vocab-modal/new-vocab-modal.component';
+import { EditVocabModalComponent } from './edit-vocab-modal/edit-vocab-modal.component';
 
 
 // specify the key where the token is stored in the local storage
@@ -36,7 +37,8 @@ export function tokenGetter() {
     HomeComponent,
     LoginComponent,
     DashboardComponent,
-    NewVocabModalComponent
+    NewVocabModalComponent,
+    EditVocabModalComponent
   ],
   imports: [
     AppRoutingModule,

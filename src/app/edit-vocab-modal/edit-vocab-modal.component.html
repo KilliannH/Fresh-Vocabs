@@ -8,13 +8,13 @@
       <div class="mb-3">
         <label for="word">Word</label>
         <div class="input-group">
-          <input id="word" class="form-control" name="word" [(ngModel)]="newVocab.word">
+          <input id="word" class="form-control" name="word" [(ngModel)]="currVocab.word">
         </div>
       </div>
       <div class="mb-3">
         <label for="translation">Translation</label>
         <div class="input-group">
-          <input id="translation" class="form-control" name="translate" [(ngModel)]="newVocab.translation">
+          <input id="translation" class="form-control" name="translate" [(ngModel)]="currVocab.translation">
         </div>
       </div>
       <div class="mb-3">
@@ -30,4 +30,4 @@
   </div>
 </ng-template>
 
-<button class="btn btn-lg btn-primary" (click)="open(content)">Add</button>
+<a role="button" class="link-primary" (click)="open(content)"><i class="bi bi-pencil-square"></i></a>

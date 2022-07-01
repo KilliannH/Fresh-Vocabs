@@ -35,10 +35,8 @@ export const partOfSpeechItems: string[] = [
 
 // function to convert a vocab with it's partOfSpeech as a string
 export function convertVocab(vocab: any) {
-  return vocab.map((item: any) => {
-    item.partOfSpeech = partOfSpeechItems[item.partOfSpeech];
-    return item;
-  });
+  vocab.partOfSpeech = partOfSpeechItems[vocab.partOfSpeech];
+  return vocab;
 }
 
 /* export interface RegisterRequest {
