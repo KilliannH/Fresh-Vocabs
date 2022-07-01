@@ -20,7 +20,7 @@
       <div class="mb-3">
         <label>Part of speech</label>
         <div class="buttons-group">
-          <button *ngFor="let item of partOfSpeechItems" type="button" class="btn btn-outline-secondary button-partOfSpeech">{{item}}</button>
+          <button *ngFor="let item of buttons" type="button" (click)="selectItem(item)" [ngClass]="{'btn-secondary': item.selected, 'btn-outline-secondary': !item.selected}" class="btn btn-outline-secondary button-partOfSpeech">{{item.value}}</button>
         </div>
       </div>
     </form>

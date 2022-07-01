@@ -22,7 +22,7 @@ import { NewVocabModalComponent } from './new-vocab-modal/new-vocab-modal.compon
 
 
 // specify the key where the token is stored in the local storage
-export const LOCALSTORAGE_TOKEN_KEY = 'fresh_vocab_login_and_register_example';
+export const LOCALSTORAGE_TOKEN_KEY = 'fresh_vocab_login_and_register_token';
 
 // specify tokenGetter for the angular jwt package
 export function tokenGetter() {

@@ -2,7 +2,7 @@ export class Vocab {
   id: string | undefined;
   word: string;
   translation: string;
-  partOfSpeech: number;
+  partOfSpeech: number | null;
 
   //Vocabs Schema
   /*
@@ -16,7 +16,7 @@ export class Vocab {
    6: "Conjunction",
    7: "Interjection"
   } */
-  constructor(id: string | undefined, word: string, translation: string, partOfSpeech: number) {
+  constructor(id: string | undefined, word: string, translation: string, partOfSpeech: number | null) {
     this.id = id;
     this.word = word;
     this.translation = translation;

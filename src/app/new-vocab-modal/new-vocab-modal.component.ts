@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {partOfSpeechItems} from "../interfaces"
 import {Vocab} from "../models/vocab";
@@ -12,11 +12,16 @@ export class NewVocabModalComponent {
 
   closeResult = '';
   newVocab: Vocab;
-  partOfSpeechItems: string [];
+  buttons: {
+    value: string,
+    selected: boolean
+  }[];
 
   constructor(private modalService: NgbModal) {
-    this.partOfSpeechItems = partOfSpeechItems;
-    this.newVocab = new Vocab(undefined, '', '', 0);
+    this.buttons = partOfSpeechItems.map((item) => {
+      return {value: item, selected: false}
+    });
+    this.newVocab = new Vocab(undefined, "", "", null);
   }
 
   open(content: object) {
@@ -28,6 +33,20 @@ export class NewVocabModalComponent {
       this.closeResult = `Dismissed ${NewVocabModalComponent.getDismissReason(reason)}`;
       console.log("reason", this.closeResult);
     });
+  }
+
+  selectItem(item: { value: string, selected: boolean }) {
+    this.buttons.forEach((item) => {
+      if(item.selected) {
+        item.selected = false;
+      }
+    });
+    // can't select none
+    if(item.selected) {
+      return;
+    }
+    item.selected = true;
+    this.newVocab.partOfSpeech = partOfSpeechItems.indexOf(item.value);
   }
 
   private static getDismissReason(reason: any): string {
