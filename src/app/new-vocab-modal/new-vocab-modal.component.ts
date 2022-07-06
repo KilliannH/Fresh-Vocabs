@@ -3,6 +3,7 @@ import {NgbModal, ModalDismissReasons, NgbModalRef} from '@ng-bootstrap/ng-boots
 import {convertVocab, partOfSpeechItems} from "../interfaces"
 import {Vocab} from "../models/vocab";
 import {DataService} from "../services/data.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-new-vocab-modal',
@@ -15,6 +16,11 @@ export class NewVocabModalComponent implements OnInit {
 
   //@ts-ignore
   newVocab: Vocab;
+
+  newVocabForm: FormGroup = new FormGroup({
+    word: new FormControl(null, [Validators.required]),
+    translation: new FormControl(null, [Validators.required]),
+  });
 
   @Input()
   allVocabs: any;
@@ -30,10 +36,11 @@ export class NewVocabModalComponent implements OnInit {
     this.buttons = partOfSpeechItems.map((item) => {
       return {value: item, selected: false}
     });
-    this.resetNgModel();
+    this.resetNewVocab();
+    this.newVocabForm.valueChanges.subscribe(data => this.onFormValueChange(data));
   }
 
-  resetNgModel() {
+  resetNewVocab() {
     this.newVocab = new Vocab(undefined, "", "", null);
   }
 
@@ -41,12 +48,13 @@ export class NewVocabModalComponent implements OnInit {
 
     this.modalService.open(content, {ariaLabelledBy: 'Add new vocab'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-      console.log("result", this.closeResult);
-      this.dataService.newVocab(this.newVocab).subscribe((res: any) => {
-        const converted = convertVocab(res);
-        this.allVocabs.push(converted);
-        this.resetNgModel();
-      });
+      if(result === 'Save click') {
+        this.dataService.newVocab(this.newVocab).subscribe((res: any) => {
+          const converted = convertVocab(res);
+          this.allVocabs.push(converted);
+          this.resetNewVocab();
+        });
+      }
     }, (reason) => {
       this.closeResult = `Dismissed ${NewVocabModalComponent.getDismissReason(reason)}`;
       console.log("reason", this.closeResult);
@@ -77,14 +85,23 @@ export class NewVocabModalComponent implements OnInit {
     }
   }
 
+  private onFormValueChange(data: { word: string; translation: string; }) {
+    this.newVocab.word = data.word
+    this.newVocab.translation = data.translation
+
+    // or
+    /* for (const key in this.studentForm.controls) {
+      const control = this.studentForm.get(key);
+      this.selectedStudent[key] = control.value
+    } */
+  }
+
   checkBeforeSave(modal: NgbModalRef) {
-    if (this.newVocab.word === "" ||
-        this.newVocab.translation === "" ||
-        !this.newVocab.partOfSpeech) {
+    if (!this.newVocabForm.valid || !this.newVocab.partOfSpeech) {
       // TODO: show snackbar to user
       return;
     }
-    // modal.close('Save click');
+    modal.close('Save click');
   }
 
 }

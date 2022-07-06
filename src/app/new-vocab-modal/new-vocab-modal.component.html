@@ -4,17 +4,17 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
-    <form>
+    <form [formGroup]="newVocabForm">
       <div class="mb-3">
         <label for="word">Word</label>
         <div class="input-group">
-          <input ngbAutofocus id="word" class="form-control" name="word" [(ngModel)]="newVocab.word">
+          <input ngbAutofocus id="word" class="form-control" formControlName="word">
         </div>
       </div>
       <div class="mb-3">
         <label for="translation">Translation</label>
         <div class="input-group">
-          <input id="translation" class="form-control" name="translate" [(ngModel)]="newVocab.translation">
+          <input id="translation" class="form-control" formControlName="translation">
         </div>
       </div>
       <div class="mb-3">
